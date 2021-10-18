@@ -1,16 +1,12 @@
-# todo
+# アプリ名：
+Doする君
 
-A new Flutter project.
+##何故作るのか：
+自分が個人的に欲しい事と
+Todoアプリと家計簿アプリを使い分けるのは面倒だなぁと感じたため
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+##何ができるのか：
+Todoアプリの延長でやりたいゲームや買いたいものを
+記入できるようにして金額・用途・期限・リンクを
+付けられるようにする。
+追加で家計簿的な機能もつける予定
