@@ -7,14 +7,73 @@ class createPage extends StatefulWidget {
 }
 
 class _createPageState extends State<createPage> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Center(
+        body: ListView(
+          children: <Widget>[
+          Container(
             child: Container(
-              child: Text("メモ制作"),
+              alignment: Alignment.center,
+              child: Text("メモ作成", style: TextStyle(fontSize: 40),),
+            ),
         ),
+        Container(
+          child: Text(
+          ""
+          )
         ),
-    );
+        TextField(
+        decoration: InputDecoration(
+        border: OutlineInputBorder(),
+        hintText: 'メモの題名を入力してください',
+        ),
+        maxLines: null,
+        ),
+        Container(
+          child: Text(
+          ""
+          )
+        ),
+        TextField(
+        decoration: InputDecoration(
+        border: OutlineInputBorder(),
+        hintText: '完了までの期限を入力してください',
+        ),
+        maxLines: null,
+        ),
+            Container(
+              child: Text(
+              ""
+              )
+            ),
+              TextField(
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                hintText: '金額を入力してください',
+              ),
+              maxLines: null,
+            ),
+            Container(
+              child: Text(
+                  ""
+              )
+            ),
+            TextField(
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                hintText: 'メモの内容を入力してください',
+              ),
+              maxLines: 5,
+            ),
+            Container(
+              child: Text(
+              ""
+              )
+            ),
+        ],
+              ),
+            );
   }
 }
