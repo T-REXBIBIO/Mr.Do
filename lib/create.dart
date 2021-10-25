@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todo/change.dart';
+import 'package:todo/main.dart';
 
 class createPage extends StatefulWidget {
   @override
@@ -71,6 +71,21 @@ class _createPageState extends State<createPage> {
               child: Text(
               ""
               )
+            ),
+            Container(
+            child: ElevatedButton(
+              onPressed: (){
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                    builder: (context) => TodoListPage(),
+    ),
+    );
+              },
+            child: Text(
+              "メモを保存"
+              ),
+    )
             ),
         ],
               ),

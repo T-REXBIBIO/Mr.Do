@@ -21,20 +21,20 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.red,
       ),
       // リスト一覧画面を表示
-      home: _TodoListPageState(),
+      home: TodoListPage(),
     );
   }
 }
 
 // リスト一覧画面用Widget
-class _TodoListPageState extends StatefulWidget {
+class TodoListPage extends StatefulWidget {
 
-  _TodoListPageState({ Key? key}) : super(key: key);
+  TodoListPage({ Key? key}) : super(key: key);
 
-  State<_TodoListPageState> createState() => TodoListPage();
+  State<TodoListPage> createState() => _TodoListPageState();
 }
 
-class TodoListPage extends State<_TodoListPageState> {
+class _TodoListPageState extends State<TodoListPage> {
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +50,8 @@ class TodoListPage extends State<_TodoListPageState> {
                 Container(
                   height: 50,
                   color: Colors.blue[600],
-                  child: Text('テスト'),
+                  child: Text('テスト', textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 35),),
                 ),
               ],
             ),
