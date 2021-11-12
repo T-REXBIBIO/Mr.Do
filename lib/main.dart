@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:todo/contents.dart';
 import 'package:todo/change.dart';
@@ -36,41 +38,62 @@ class TodoListPage extends StatefulWidget {
 
 class _TodoListPageState extends State<TodoListPage> {
 
+  List<Memo> MemoList =[
+    Memo(
+        title: "メモのタイトル",
+        content: "メモの内容",
+        price: 0,
+        limit: DateTime.now(),
+    )
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: <Widget>[
-          Container(
-            height: 125,
-            padding: EdgeInsets.all(4),
-            // childrenを指定してリスト表示
-            child: ListView(
-              children: <Widget>[
-                Container(
-                  height: 50,
-                  color: Colors.blue[600],
-                  child: Text('テスト', textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 35),),
-                ),
-              ],
-            ),
-          ),
-        ],
+      appBar: AppBar(
+        title: Text('リスト一覧'),
       ),
+      body: ListView.builder(
+      itemCount: MemoList.length,
+      itemBuilder: (context, index) {
+        return Card(
+          child: ListTile(
+            title: Text(MemoList[index].title),
+            subtitle: Text(MemoList[index].content),
+            trailing: Icon(Icons.delete),
+          ),
+        );
+      },
+    ),
       floatingActionButton: FloatingActionButton(
         child: Icon(
           Icons.add
         ),
-        onPressed: () {
-          Navigator.push(
-            context,
+        //画面遷移
+        onPressed: () async {
+          final Memo = await Navigator.of(context).push(
             MaterialPageRoute(
               builder: (context) => createPage(),
             ),
           );
+          setState(() {
+            MemoList.add(Memo);
+          });
         },
       ),
     );
   }
+}
+//ここがメモ作成情報を受け取る場所
+class Memo {
+  Memo({
+  required this.title,
+  required this.content,
+  required this.price,
+  required this.limit,
+  });
+  String title;
+  String content;
+  int price;
+  DateTime limit;
 }

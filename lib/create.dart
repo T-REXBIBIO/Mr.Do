@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:todo/main.dart';
 
 class createPage extends StatefulWidget {
@@ -7,6 +8,11 @@ class createPage extends StatefulWidget {
 }
 
 class _createPageState extends State<createPage> {
+
+  String title = "";
+  String content = "";
+  int price = 0;
+  DateTime limit = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -30,18 +36,27 @@ class _createPageState extends State<createPage> {
         hintText: 'メモの題名を入力してください',
         ),
         maxLines: null,
+          onChanged: (Title){
+          title = Title;
+          setState(() {});
+          },
         ),
         Container(
           child: Text(
           ""
           )
         ),
+        //ここはDateTimePickerで作る
         TextField(
         decoration: InputDecoration(
         border: OutlineInputBorder(),
         hintText: '完了までの期限を入力してください',
         ),
         maxLines: null,
+            onChanged: (Limit){
+              limit = Limit as DateTime;
+              setState(() {});
+            }
         ),
             Container(
               child: Text(
@@ -49,11 +64,17 @@ class _createPageState extends State<createPage> {
               )
             ),
               TextField(
+              keyboardType: TextInputType.number,
+              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 hintText: '金額を入力してください',
               ),
               maxLines: null,
+                  onChanged: (Price){
+                    price = int.parse(Price);
+                    setState(() {});
+                  }
             ),
             Container(
               child: Text(
@@ -65,7 +86,11 @@ class _createPageState extends State<createPage> {
                 border: OutlineInputBorder(),
                 hintText: 'メモの内容を入力してください',
               ),
-              maxLines: 5,
+              maxLines: 10,
+                onChanged: (Content){
+                  content = Content;
+                  setState(() {});
+                }
             ),
             Container(
               child: Text(
@@ -74,17 +99,15 @@ class _createPageState extends State<createPage> {
             ),
             Container(
             child: ElevatedButton(
-              onPressed: (){
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                    builder: (context) => TodoListPage(),
-    ),
-    );
-              },
-            child: Text(
-              "メモを保存"
-              ),
+                    onPressed: () {
+                    Navigator.of(context).pop(Memo(
+                      title: title,
+                      content: content,
+                      price: price,
+                      limit: limit
+                    ));
+                },
+            child: Text("メモを保存"),
     )
             ),
         ],
