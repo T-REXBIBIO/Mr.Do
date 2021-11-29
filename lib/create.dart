@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:todo/main.dart';
 
 class createPage extends StatefulWidget {
@@ -88,6 +87,7 @@ class _createPageState extends State<createPage> {
           ),
           //ここはDateTimePickerで作る
           Container(
+            height: 60,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -102,8 +102,7 @@ class _createPageState extends State<createPage> {
             alignment: Alignment.center,
             decoration: BoxDecoration(
               border: Border.all(
-                color: Colors.black,
-                width: 1,
+                color: Colors.grey,
               ),
             ),
           ),
@@ -160,6 +159,16 @@ class _createPageState extends State<createPage> {
                 child: Text("メモを保存"),
               )
           ),
+          Container(
+            child: RaisedButton(
+              child: const Text("Homeに戻る"),
+              color: Colors.red,
+              shape: const StadiumBorder(),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          )
         ],
       ),
     );

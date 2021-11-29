@@ -1,24 +1,17 @@
 import 'package:flutter/material.dart';
 import "package:firebase_core/firebase_core.dart";
+import 'package:todo/main.dart';
 import 'package:todo/change.dart';
 
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key}) : super(key: key);
+class ContentsPage extends StatefulWidget {
+  ContentsPage(List<Memo> memoList, {Key? key}) : super(key: key);
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<ContentsPage> createState() => _ContentsPageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+class _ContentsPageState extends State<ContentsPage> {
 
   @override
   Widget build(BuildContext context) {
@@ -26,20 +19,24 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       body: Center(
         child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget> [
+            Text("メモのタイトル（title）"),
+            Text("メモの期限（limit）"),
+            Text("メモにかかるお金（price）"),
+            Text("メモの本文（content）"),
+            Container(
+              child: RaisedButton(
+                child: const Text("Homeに戻る"),
+                color: Colors.red,
+                shape: const StadiumBorder(),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            )
+            ]
         ), // This trailing comma makes auto-formatting nicer for build methods.
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(
-          Icons.edit
-        ),
-          onPressed: (){
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                builder: (context) => changePage(),
-            ),
-            );
-          },
       ),
     );
   }

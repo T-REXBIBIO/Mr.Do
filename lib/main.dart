@@ -1,14 +1,12 @@
-import 'dart:ffi';
-import 'JapaneseCupertinoLocalizations.dart' as jcl;
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:todo/contents.dart';
 import 'package:todo/change.dart';
 import 'package:todo/create.dart';
 import "package:firebase_core/firebase_core.dart";
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:intl/intl.dart';
+import 'JapaneseCupertinoLocalizations.dart' as jcl;
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() async {
   // runAppを呼ぶ前に色々処理を行いたい時は初めにこれを書く必要がある。
@@ -41,26 +39,23 @@ class MyApp extends StatelessWidget {
       ],
 
       supportedLocales: [
-
         const Locale('en', 'US'),
         const Locale('ja', 'JP'),
       ],
-      locale:  Locale('ja', 'JP'),
+      locale: Locale('ja', 'JP'),
     );
   }
 }
 
 // リスト一覧画面用Widget
 class TodoListPage extends StatefulWidget {
-
-  TodoListPage({ Key? key}) : super(key: key);
+  TodoListPage({Key? key}) : super(key: key);
 
   State<TodoListPage> createState() => _TodoListPageState();
 }
 
 class _TodoListPageState extends State<TodoListPage> {
-
-  List<Memo> MemoList =[];
+  List<Memo> MemoList = [];
 
   Future<void> fetchTodoList() async {
     // Todo というコレクションに保存されているドキュメントをすべて取得する
@@ -68,15 +63,15 @@ class _TodoListPageState extends State<TodoListPage> {
     MemoList = snapshot.docs.map((doc) {
       final data = doc.data();
       final memo = Memo(
-        title: data["title"],
-        content: data["content"],
-        price: data["price"],
-        limit: (data["limit"] as Timestamp).toDate(),
-        date: (data["date"] as Timestamp).toDate(),
-        reference: doc.reference);
+          title: data["title"],
+          content: data["content"],
+          price: data["price"],
+          limit: (data["limit"] as Timestamp).toDate(),
+          date: (data["date"] as Timestamp).toDate(),
+          reference: doc.reference);
       return memo;
     }).toList();
-    setState(() {});// 画面を更新
+    setState(() {}); // 画面を更新
   }
 
   @override
@@ -92,28 +87,46 @@ class _TodoListPageState extends State<TodoListPage> {
         title: Text('リスト一覧'),
       ),
       body: ListView.builder(
-      itemCount: MemoList.length,
-      itemBuilder: (context, index) {
-        return Card(
-          child: ListTile(
-            title: Text(MemoList[index].title),
-            subtitle: Text(MemoList[index].content),
-            trailing: Icon(Icons.delete),
-            onTap: () {
-              //削除処理
-              MemoList.removeAt(index);
-              //データベース（Firebeseの方）も消す処理
-              MemoList[index].reference?.delete();
-              setState(() {});
-            },
-          ),
-        );
-      },
-    ),
+        itemCount: MemoList.length,
+        itemBuilder: (context, index) {
+          return Card(
+            child: Column(
+              children: <Widget>[
+                ListTile(
+                  title: Text(MemoList[index].title),
+                  subtitle: Text(MemoList[index].content),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ContentsPage(MemoList),
+                      )
+                    );
+                  },
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget> [
+                    TextButton(
+                    child: Text("削除"),
+                    onPressed: () async {
+                    //awaitを付けているのは同時に処理すると
+                    //クラウド側の情報もなくなるため両方とも削除する対象がなくなり
+                    //削除処理が走らなくなってしまうことを防ぐため
+                    await MemoList[index].reference?.delete();
+                    MemoList.removeAt(index);
+                    setState(() {});
+                    },
+                    )
+                  ],
+                ),
+              ],
+            ),
+          );
+        },
+      ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(
-          Icons.add
-        ),
+        child: Icon(Icons.add),
         //画面遷移
         onPressed: () async {
           final Memo = await Navigator.of(context).push(
@@ -128,13 +141,14 @@ class _TodoListPageState extends State<TodoListPage> {
     );
   }
 }
+
 //ここがメモ作成情報を受け取る場所
 class Memo {
   Memo({
-  required this.title,
-  required this.content,
-  required this.price,
-  required this.limit,
+    required this.title,
+    required this.content,
+    required this.price,
+    required this.limit,
     required this.date,
     required this.reference,
   });
