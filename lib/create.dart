@@ -22,7 +22,7 @@ class _createPageState extends State<createPage> {
     if(limit == null){
       return '日付を選択してください。';
     }
-    DateFormat outputFormat = DateFormat('yyyy-MM-dd-H:mm');
+    DateFormat outputFormat = DateFormat('yyyy年MM月dd日H時mm分');
     return outputFormat.format(limit!);
   }
 
@@ -59,19 +59,11 @@ class _createPageState extends State<createPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("メモを追加します！"),
+      ),
       body: ListView(
         children: <Widget>[
-          Container(
-            child: Container(
-              alignment: Alignment.center,
-              child: Text("メモを追加します！", style: TextStyle(fontSize: 40),),
-            ),
-          ),
-          Container(
-              child: Text(
-                  ""
-              )
-          ),
           TextField(
             decoration: InputDecoration(
               border: OutlineInputBorder(),
@@ -144,6 +136,11 @@ class _createPageState extends State<createPage> {
               )
           ),
           Container(
+              child: Text(
+                  ""
+              )
+          ),
+          Container(
               child: ElevatedButton(
                 onPressed: () {
                   FirebaseFirestore.instance.collection("Todo").add({
@@ -157,6 +154,16 @@ class _createPageState extends State<createPage> {
                   Navigator.of(context).pop();
                 },
                 child: Text("メモを保存"),
+              )
+          ),
+          Container(
+              child: Text(
+                  ""
+              )
+          ),
+          Container(
+              child: Text(
+                  ""
               )
           ),
           Container(

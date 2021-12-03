@@ -5,6 +5,7 @@ import 'package:todo/create.dart';
 import "package:firebase_core/firebase_core.dart";
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'JapaneseCupertinoLocalizations.dart' as jcl;
+import 'package:intl/intl.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
@@ -99,7 +100,7 @@ class _TodoListPageState extends State<TodoListPage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ContentsPage(MemoList),
+                        builder: (context) => ContentsPage(MemoList: MemoList,index: index),
                       )
                     );
                   },
