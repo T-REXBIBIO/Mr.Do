@@ -86,10 +86,13 @@ class _ContentsPageState extends State<ContentsPage> {
               child: Text(""),
             ),
             Container(
-              child: RaisedButton(
-                child: const Text("Homeに戻る"),
+              child: RaisedButton.icon(
+                icon: Icon(Icons.home),
+                label: Text("Homeに戻る"),
                 color: Colors.purple,
-                shape: const StadiumBorder(),
+                shape: BeveledRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },

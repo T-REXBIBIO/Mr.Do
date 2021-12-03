@@ -20,7 +20,7 @@ class _createPageState extends State<createPage> {
 
   String get see {
     if(limit == null){
-      return '日付を選択してください。';
+      return '日付を選択してください。時計マークをタッチ→';
     }
     DateFormat outputFormat = DateFormat('yyyy年MM月dd日H時mm分');
     return outputFormat.format(limit!);
@@ -79,7 +79,7 @@ class _createPageState extends State<createPage> {
           ),
           //ここはDateTimePickerで作る
           Container(
-            height: 60,
+            height: 65,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -141,7 +141,12 @@ class _createPageState extends State<createPage> {
               )
           ),
           Container(
-              child: ElevatedButton(
+              child: RaisedButton.icon(
+                icon: Icon(Icons.done),
+              label: Text("保存"),
+              shape: BeveledRectangleBorder(
+              borderRadius: BorderRadius.circular(10.0),
+              ),
                 onPressed: () {
                   FirebaseFirestore.instance.collection("Todo").add({
                     "title": title,
@@ -153,7 +158,6 @@ class _createPageState extends State<createPage> {
                   );
                   Navigator.of(context).pop();
                 },
-                child: Text("メモを保存"),
               )
           ),
           Container(
@@ -167,15 +171,17 @@ class _createPageState extends State<createPage> {
               )
           ),
           Container(
-            child: RaisedButton(
-              child: const Text("Homeに戻る"),
-              color: Colors.red,
-              shape: const StadiumBorder(),
+            child: RaisedButton.icon(
+              icon: Icon(Icons.home),
+              label: Text("Homeに戻る"),
+            shape: BeveledRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+            ),
               onPressed: () {
                 Navigator.of(context).pop();
               },
-            ),
-          )
+          ),
+          ),
         ],
       ),
     );

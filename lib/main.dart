@@ -86,6 +86,39 @@ class _TodoListPageState extends State<TodoListPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('リスト一覧'),
+          actions: <Widget>[
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget> [
+                SizedBox(
+                  height: 50.0,
+                  width: 100.0,
+                  child: FloatingActionButton.extended(
+                    shape: BeveledRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0)
+                    ),
+                    backgroundColor: Colors.lightBlueAccent,
+                    icon: Icon(Icons.add),
+                    label: Text("追加",
+                      style: TextStyle(
+                          color:Colors.black,
+                          fontSize: 15.0
+                      ),
+                    ),
+                    onPressed: () async {
+                      final Memo = await Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => createPage(),
+                        ),
+                      );
+                      await fetchTodoList();
+                      setState(() {});
+                      },
+                  ),
+                ),
+              ],
+            ),
+          ],
       ),
       body: ListView.builder(
         itemCount: MemoList.length,
@@ -124,19 +157,6 @@ class _TodoListPageState extends State<TodoListPage> {
               ],
             ),
           );
-        },
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        //画面遷移
-        onPressed: () async {
-          final Memo = await Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => createPage(),
-            ),
-          );
-          await fetchTodoList();
-          setState(() {});
         },
       ),
     );
