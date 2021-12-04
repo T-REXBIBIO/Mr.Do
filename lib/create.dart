@@ -62,7 +62,7 @@ class _createPageState extends State<createPage> {
       appBar: AppBar(
         title: Text("メモを追加します！"),
       ),
-      body: ListView(
+      body: Column(
         children: <Widget>[
           TextField(
             decoration: InputDecoration(
@@ -144,6 +144,7 @@ class _createPageState extends State<createPage> {
               child: RaisedButton.icon(
                 icon: Icon(Icons.done),
               label: Text("保存"),
+              color: Colors.lightGreen,
               shape: BeveledRectangleBorder(
               borderRadius: BorderRadius.circular(10.0),
               ),
@@ -174,9 +175,10 @@ class _createPageState extends State<createPage> {
             child: RaisedButton.icon(
               icon: Icon(Icons.home),
               label: Text("Homeに戻る"),
+            color: Colors.red,
             shape: BeveledRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
-            ),
+             ),
               onPressed: () {
                 Navigator.of(context).pop();
               },

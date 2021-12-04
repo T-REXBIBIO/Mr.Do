@@ -38,7 +38,6 @@ class MyApp extends StatelessWidget {
         DefaultCupertinoLocalizations.delegate,
         jcl.JapaneseCupertinoLocalizations.delegate,
       ],
-
       supportedLocales: [
         const Locale('en', 'US'),
         const Locale('ja', 'JP'),

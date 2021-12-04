@@ -3,12 +3,13 @@ import "package:firebase_core/firebase_core.dart";
 import 'package:intl/intl.dart';
 import 'package:todo/main.dart';
 import 'package:todo/change.dart';
+import 'package:todo/change.dart';
 
 
 class ContentsPage extends StatefulWidget {
   ContentsPage({Key? key,this.MemoList = const [],required this.index}) : super(key: key);
-  final int index;
   final List<Memo> MemoList;
+  final int index;
   @override
   State<ContentsPage> createState() => _ContentsPageState();
 }
@@ -37,7 +38,39 @@ class _ContentsPageState extends State<ContentsPage> {
 
     return Scaffold(
       appBar: AppBar(
-      title: Text(widget.MemoList[widget.index].title)
+      title: Text(widget.MemoList[widget.index].title),
+        actions: <Widget>[
+      Column(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget> [
+          SizedBox(
+            height: 50.0,
+            width: 100.0,
+            child: FloatingActionButton.extended(
+              shape: BeveledRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0)
+              ),
+              backgroundColor: Colors.lightBlueAccent,
+              icon: Icon(Icons.create),
+              label: Text("変更",
+                style: TextStyle(
+                    color:Colors.black,
+                    fontSize: 15.0
+                ),
+              ),
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => changePage(MemoList: widget.MemoList, index: widget.index),
+                  ),
+                );
+                setState(() {});
+              },
+            ),
+          ),
+        ],
+      ),
+      ],
       ),
       body: Center(
         child: Column(
@@ -45,12 +78,12 @@ class _ContentsPageState extends State<ContentsPage> {
           children: <Widget> [
             Container(
         decoration: BoxDecoration(
-            border: Border.all(color: Colors.black),
+            border: Border.all(color: Colors.grey),
       ),
-            child: Text(Limit,
+            child: Text(Limit + "まで",
             style: TextStyle(fontSize: 20),
             ),
-              width: 250.0,
+              width: 300.0,
               height: 65.0,
               alignment: Alignment.center,
             ),
@@ -59,7 +92,7 @@ class _ContentsPageState extends State<ContentsPage> {
             ),
             Container(
             decoration: BoxDecoration(
-            border: Border.all(color: Colors.black),
+            border: Border.all(color: Colors.grey),
     ),
             child: Text(result + "円",
             style: TextStyle(fontSize: 22),
@@ -73,7 +106,7 @@ class _ContentsPageState extends State<ContentsPage> {
             ),
             Container(
             decoration: BoxDecoration(
-            border: Border.all(color: Colors.black),
+            border: Border.all(color: Colors.grey),
     ),
             child: Text(widget.MemoList[widget.index].content,
               style: TextStyle(fontSize: 18),
