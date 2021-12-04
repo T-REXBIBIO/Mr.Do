@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:todo/main.dart';
 import "package:firebase_core/firebase_core.dart";
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -15,6 +17,8 @@ class changePage extends StatefulWidget{
 
 class _changePageState extends State<changePage> {
 
+  DateTime Date = DateTime.now();
+
   String get result {
     if (widget.MemoList[widget.index].price == 0) {
       return "金額が入力されていません";
@@ -30,6 +34,44 @@ class _changePageState extends State<changePage> {
     }
     DateFormat outputFormat = DateFormat('yyyy年MM月dd日H時mm分');
     return outputFormat.format(widget.MemoList[widget.index].limit);
+  }
+
+  String get see {
+    if(widget.MemoList[widget.index].limit == null){
+      return '日付を選択してください。時計マークをタッチ→';
+    }
+    DateFormat outputFormat = DateFormat('yyyy年MM月dd日H時mm分');
+    return outputFormat.format(widget.MemoList[widget.index].limit!);
+  }
+
+  void _showDatePicker(ctx) {
+    // showCupertinoModalPopup is a built-in function of the cupertino library
+    showCupertinoModalPopup(
+        context: ctx,
+        builder: (_) => Container(
+          height: 500,
+          color: Color.fromARGB(255, 255, 255, 255),
+          child: Column(
+            children: [
+              Container(
+                height: 400,
+                child: CupertinoDatePicker(
+                    initialDateTime: DateTime.now(),
+                    onDateTimeChanged: (val) {
+                      setState(() {
+                        widget.MemoList[widget.index].limit = val;
+                      });
+                    }),
+              ),
+
+              // Close the modal
+              CupertinoButton(
+                child: Text('OK'),
+                onPressed: () => Navigator.of(ctx).pop(),
+              )
+            ],
+          ),
+        ));
   }
 
   @override
@@ -56,6 +98,9 @@ class _changePageState extends State<changePage> {
               hintText: "ここでメモのタイトルを変更できます。",
             ),
             maxLines: null,
+              onChanged: (Title) {
+                widget.MemoList[widget.index].title = Title;
+              }
           ),
           ),
           Container(
@@ -71,11 +116,16 @@ class _changePageState extends State<changePage> {
           ),
           Container(
             child: TextField(
-              decoration: InputDecoration(
+                keyboardType: TextInputType.number,
+                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 hintText: "ここで料金・経費を変更できます。",
               ),
               maxLines: null,
+                onChanged: (Price) {
+                  widget.MemoList[widget.index].price = int.parse(Price);
+                }
             ),
           ),
           Container(
@@ -90,12 +140,22 @@ class _changePageState extends State<changePage> {
             height: 65.0,
           ),
           Container(
-            child: TextField(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: "ここで期限を変更できます。",
+            height: 65,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Text(see),
+                IconButton(
+                  icon: Icon(Icons.schedule),
+                  onPressed: () => _showDatePicker(context),
+                ),
+              ],
+            ),
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: Colors.grey,
               ),
-              maxLines: null,
             ),
           ),
           Container(
@@ -116,6 +176,9 @@ class _changePageState extends State<changePage> {
                 hintText: "ここでメモの内容を変更できます。",
               ),
               maxLines: null,
+                onChanged: (Content) {
+                  widget.MemoList[widget.index].content = Content;
+                }
             ),
           ),
           Container(
@@ -127,7 +190,15 @@ class _changePageState extends State<changePage> {
                 borderRadius: BorderRadius.circular(10.0),
               ),
               onPressed: () {
-
+                widget.MemoList[widget.index].reference?.update({
+                  "title": widget.MemoList[widget.index].title,
+                  "content": widget.MemoList[widget.index].content,
+                  "price": widget.MemoList[widget.index].price,
+                  "limit": widget.MemoList[widget.index].limit,
+                  "date": Date,
+                });
+                Navigator.popUntil(context, (route) => route.isFirst);
+                setState(() {});
               },
             ),
           ),

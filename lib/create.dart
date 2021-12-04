@@ -67,7 +67,7 @@ class _createPageState extends State<createPage> {
           TextField(
             decoration: InputDecoration(
               border: OutlineInputBorder(),
-              hintText: 'メモの題名を入力してください',
+              hintText: 'メモのタイトルを入力してください',
             ),
             maxLines: null,
             onChanged: (Title) {
@@ -88,7 +88,6 @@ class _createPageState extends State<createPage> {
                     icon: Icon(Icons.schedule),
                   onPressed: () => _showDatePicker(context),
                 ),
-
               ],
             ),
             alignment: Alignment.center,
