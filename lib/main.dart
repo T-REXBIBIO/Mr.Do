@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:todo/contents.dart';
-import 'package:todo/change.dart';
 import 'package:todo/create.dart';
+import 'package:todo/HouseBook.dart';
+import 'package:todo/Bottom_Nav_Trial.dart';
 import "package:firebase_core/firebase_core.dart";
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'JapaneseCupertinoLocalizations.dart' as jcl;
-import 'package:intl/intl.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
@@ -84,35 +84,62 @@ class _TodoListPageState extends State<TodoListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('リスト一覧'),
+        title: Padding(
+        padding: const EdgeInsets.only(left: 15.0),
+          child:Text('メモリスト一覧'),
+        ),
+          centerTitle: false,
           actions: <Widget>[
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget> [
                 SizedBox(
                   height: 50.0,
-                  width: 100.0,
-                  child: FloatingActionButton.extended(
-                    shape: BeveledRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0)
-                    ),
-                    backgroundColor: Colors.lightBlueAccent,
-                    icon: Icon(Icons.add),
-                    label: Text("追加",
-                      style: TextStyle(
-                          color:Colors.black,
-                          fontSize: 15.0
-                      ),
-                    ),
-                    onPressed: () async {
-                      final Memo = await Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => createPage(),
+                  width: 230.0,
+                  child: Row(
+                    children: [
+                      FloatingActionButton.extended(
+                        shape: BeveledRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0)
                         ),
-                      );
-                      await fetchTodoList();
-                      setState(() {});
-                      },
+                        backgroundColor: Colors.lightBlueAccent,
+                        icon: Icon(Icons.add),
+                        label: Text("追加",
+                          style: TextStyle(
+                              color:Colors.black,
+                              fontSize: 15.0
+                          ),
+                        ),
+                        onPressed: () async {
+                          final Memo = await Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => createPage(),
+                            ),
+                          );
+                          await fetchTodoList();
+                          setState(() {});
+                        },
+                      ),
+                      FloatingActionButton.extended(
+                        shape: BeveledRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0)
+                        ),
+                        backgroundColor: Colors.amber,
+                        icon: Icon(Icons.attach_money),
+                        label: Text("家計簿",
+                          style: TextStyle(
+                              color:Colors.black,
+                              fontSize: 15.0
+                          ),
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(builder: (context) => HouseBook(MemoList: MemoList, index: 0,),
+                          ),
+                          );
+                        },
+                      ),
+                    ],
                   ),
                 ),
               ],
@@ -130,30 +157,40 @@ class _TodoListPageState extends State<TodoListPage> {
                   subtitle: Text(MemoList[index].content),
                   onTap: () {
                     Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ContentsPage(MemoList: MemoList,index: index),
-                      )
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              ContentsPage(MemoList: MemoList, index: index),
+                        )
                     );
                   },
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
-                  children: <Widget> [
+                  children: <Widget>[
                     TextButton(
-                    child: Text("削除"),
-                    onPressed: () async {
-                    //awaitを付けているのは同時に処理すると
-                    //クラウド側の情報もなくなるため両方とも削除する対象がなくなり
-                    //削除処理が走らなくなってしまうことを防ぐため
-                    await MemoList[index].reference?.delete();
-                    MemoList.removeAt(index);
-                    setState(() {});
-                    },
+                      child: Text("削除"),
+                      onPressed: () async {
+                        //awaitを付けているのは同時に処理すると
+                        //クラウド側の情報もなくなるため両方とも削除する対象がなくなり
+                        //削除処理が走らなくなってしまうことを防ぐため
+                        await MemoList[index].reference?.delete();
+                        MemoList.removeAt(index);
+                        setState(() {});
+                      },
                     )
                   ],
                 ),
               ],
+            ),
+          );
+        },
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.payment),
+        onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => Bottom_Nav(),
             ),
           );
         },

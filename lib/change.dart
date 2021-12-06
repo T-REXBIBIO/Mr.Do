@@ -2,8 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:todo/main.dart';
-import "package:firebase_core/firebase_core.dart";
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
 
 class changePage extends StatefulWidget{
@@ -41,7 +39,7 @@ class _changePageState extends State<changePage> {
       return '日付を選択してください。時計マークをタッチ→';
     }
     DateFormat outputFormat = DateFormat('yyyy年MM月dd日H時mm分');
-    return outputFormat.format(widget.MemoList[widget.index].limit!);
+    return outputFormat.format(widget.MemoList[widget.index].limit);
   }
 
   void _showDatePicker(ctx) {

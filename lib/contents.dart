@@ -1,13 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import "package:firebase_core/firebase_core.dart";
 import 'package:intl/intl.dart';
 import 'package:todo/main.dart';
 import 'package:todo/change.dart';
 
 
 class ContentsPage extends StatefulWidget {
-  ContentsPage({Key? key,this.MemoList = const [],required this.index}) : super(key: key);
+  ContentsPage({Key? key,this.MemoList = const [], required this.index}) : super(key: key);
   final List<Memo> MemoList;
   final int index;
   @override
