@@ -55,7 +55,10 @@ class TodoListPage extends StatefulWidget {
 }
 
 class _TodoListPageState extends State<TodoListPage> {
+
+  //これはListのMemoクラスをMemoListという配列に入れることを指している？
   List<Memo> MemoList = [];
+  int index = 0;
 
   Future<void> fetchTodoList() async {
     // Todo というコレクションに保存されているドキュメントをすべて取得する
@@ -85,7 +88,7 @@ class _TodoListPageState extends State<TodoListPage> {
     return Scaffold(
       appBar: AppBar(
         title: Padding(
-        padding: const EdgeInsets.only(left: 15.0),
+        padding: const EdgeInsets.only(left: 10.0),
           child:Text('メモリスト一覧'),
         ),
           centerTitle: false,
@@ -111,7 +114,8 @@ class _TodoListPageState extends State<TodoListPage> {
                           ),
                         ),
                         onPressed: () async {
-                          final Memo = await Navigator.of(context).push(
+                          //final Memo =
+                          await Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (context) => createPage(),
                             ),
@@ -134,7 +138,7 @@ class _TodoListPageState extends State<TodoListPage> {
                         ),
                         onPressed: () {
                           Navigator.of(context).push(
-                            MaterialPageRoute(builder: (context) => HouseBook(MemoList: MemoList, index: 0,),
+                            MaterialPageRoute(builder: (context) => HouseBook(),
                           ),
                           );
                         },
