@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
       title: 'Doする君/Mr.Do',
       theme: ThemeData(
         // テーマカラー
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.teal,
       ),
       // リスト一覧画面を表示
       home: TodoListPage(),
@@ -150,31 +150,35 @@ class _TodoListPageState extends State<TodoListPage> {
             ),
           ],
       ),
-      body: ListView.builder(
-        itemCount: MemoList.length,
-        itemBuilder: (context, index) {
-          return Card(
-            child: Column(
-              children: <Widget>[
-                ListTile(
-                  title: Text(MemoList[index].title),
-                  subtitle: Text(MemoList[index].content),
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              ContentsPage(MemoList: MemoList, index: index),
-                        )
-                    );
-                  },
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: <Widget>[
-                    TextButton(
-                      child: Text("削除"),
-                      onPressed: () async {
+      body: Container(
+        decoration: BoxDecoration(
+          color: Colors.lightGreen,
+        ),
+        child: ListView.builder(
+          itemCount: MemoList.length,
+          itemBuilder: (context, index) {
+            return Card(
+              child: Column(
+                children: <Widget>[
+                  ListTile(
+                    title: Text(MemoList[index].title),
+                    subtitle: Text(MemoList[index].content),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                ContentsPage(MemoList: MemoList, index: index),
+                          )
+                      );
+                      },
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: <Widget>[
+                      TextButton(
+                        child: Text("削除"),
+                        onPressed: () async {
                         //awaitを付けているのは同時に処理すると
                         //クラウド側の情報もなくなるため両方とも削除する対象がなくなり
                         //削除処理が走らなくなってしまうことを防ぐため
@@ -189,6 +193,7 @@ class _TodoListPageState extends State<TodoListPage> {
             ),
           );
         },
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.payment),

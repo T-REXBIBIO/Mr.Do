@@ -62,11 +62,25 @@ class _createPageState extends State<createPage> {
       appBar: AppBar(
         title: Text("メモを追加します！"),
       ),
-      body: Column(
+      body: Container(
+        decoration: BoxDecoration(
+          color: Colors.tealAccent
+        ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
-          TextField(
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              border: Border.all(color: Colors.black),
+              borderRadius: BorderRadius.circular(30),
+            ),
+          child: TextField(
             decoration: InputDecoration(
-              border: OutlineInputBorder(),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(30),
+                borderSide: BorderSide(),
+              ),
               hintText: 'メモのタイトルを入力してください',
             ),
             maxLines: null,
@@ -74,12 +88,15 @@ class _createPageState extends State<createPage> {
               title = Title;
             },
           ),
-          Container(
-              child: Text(""),
           ),
           //ここはDateTimePickerで作る
           Container(
             height: 65,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              border: Border.all(color: Colors.black),
+              borderRadius: BorderRadius.circular(30),
+            ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -91,22 +108,21 @@ class _createPageState extends State<createPage> {
               ],
             ),
             alignment: Alignment.center,
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: Colors.grey,
-              ),
-            ),
           ),
-          Container(
-              child: Text(
-                  ""
-              )
-          ),
-          TextField(
+         Container(
+           decoration: BoxDecoration(
+             color: Colors.white,
+             border: Border.all(color: Colors.black),
+             borderRadius: BorderRadius.circular(30),
+           ),
+         child: TextField(
               keyboardType: TextInputType.number,
               inputFormatters: [FilteringTextInputFormatter.digitsOnly],
               decoration: InputDecoration(
-                border: OutlineInputBorder(),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(30),
+                  borderSide: BorderSide(),
+                ),
                 hintText: '金額を入力してください',
               ),
               maxLines: null,
@@ -114,14 +130,19 @@ class _createPageState extends State<createPage> {
                 price = int.parse(Price);
               }
           ),
+         ),
           Container(
-              child: Text(
-                  ""
-              )
-          ),
-          TextField(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              border: Border.all(color: Colors.black),
+              borderRadius: BorderRadius.circular(30),
+            ),
+          child: TextField(
               decoration: InputDecoration(
-                border: OutlineInputBorder(),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(30),
+                  borderSide: BorderSide(),
+                ),
                 hintText: 'メモの内容を入力してください',
               ),
               maxLines: 10,
@@ -129,15 +150,6 @@ class _createPageState extends State<createPage> {
                 content = Content;
               }
           ),
-          Container(
-              child: Text(
-                  ""
-              )
-          ),
-          Container(
-              child: Text(
-                  ""
-              )
           ),
           Container(
               child: RaisedButton.icon(
@@ -161,16 +173,6 @@ class _createPageState extends State<createPage> {
               )
           ),
           Container(
-              child: Text(
-                  ""
-              )
-          ),
-          Container(
-              child: Text(
-                  ""
-              )
-          ),
-          Container(
             child: RaisedButton.icon(
               icon: Icon(Icons.home),
               label: Text("Homeに戻る"),
@@ -184,6 +186,7 @@ class _createPageState extends State<createPage> {
           ),
           ),
         ],
+      ),
       ),
     );
   }

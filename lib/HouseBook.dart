@@ -19,15 +19,17 @@ class _HouseBook extends State<HouseBook> {
   int index = 0;
 
   //For文でPricelistの数だけ回す（足す）事をする
-  Object get result {
+  String get result {
     if (Pricelist.isEmpty) {
       return "金額が入力されていません";
     }
     var sumPrice = 0;
+    String sumString = "";
     for(final memo in Pricelist){
       sumPrice += memo.price;
+      sumString = "合計" + sumPrice.toString() + "円";
     }
-    return sumPrice;
+    return sumString;
   }
 
   Future<void> fetchTodoList() async {
@@ -57,18 +59,53 @@ class _HouseBook extends State<HouseBook> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('経費一覧')
+        title: Text('経費一覧'),
+        actions: <Widget>[
+          Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget> [
+                Row(
+                  children: [
+                    FloatingActionButton.extended(
+                      shape: BeveledRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0)
+                      ),
+                      backgroundColor: Colors.red,
+                      icon: Icon(Icons.home),
+                      label: Text("戻る",
+                        style: TextStyle(
+                            color:Colors.black,
+                            fontSize: 15.0
+                        ),
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ],
+                ),
+            ],
+          ),
+        ],
       ),
-      body: Column(
+      body: Container(
+        decoration: BoxDecoration(
+          color: Colors.lime
+        ),
+      child: Column(
         children: [
           Container(
             decoration: BoxDecoration(
-              border: Border.all(color: Colors.grey)
+              color: Colors.amberAccent,
+              border: Border.all(color: Colors.white)
             ),
-            child: Text("合計" + result.toString() + "円"),
+            child: Text(result,
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30)
+            ),
             alignment: Alignment.center,
-            width: 300,
-            height: 250,
+            margin: EdgeInsets.all(20),
+            width: double.infinity,
+            height: 200,
           ),
           Expanded(
             child: ListView.builder(
@@ -88,6 +125,7 @@ class _HouseBook extends State<HouseBook> {
             ),
           ),
         ],
+      ),
       ),
     );
   }

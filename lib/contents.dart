@@ -4,7 +4,6 @@ import 'package:intl/intl.dart';
 import 'package:todo/main.dart';
 import 'package:todo/change.dart';
 
-
 class ContentsPage extends StatefulWidget {
   ContentsPage({Key? key,this.MemoList = const [], required this.index}) : super(key: key);
   final List<Memo> MemoList;
@@ -71,27 +70,30 @@ class _ContentsPageState extends State<ContentsPage> {
       ),
       ],
       ),
-      body: Center(
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget> [
-            Container(
-        decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey),
+      body:Container(
+      decoration: BoxDecoration(
+      color: Colors.lightGreen
       ),
-            child: Text(Limit + "まで",
-            style: TextStyle(fontSize: 20),
-            ),
+        child: Center(
+            child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget> [
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                border: Border.all(color: Colors.black, width: 5),
+              ),
+              child: Text(Limit + "まで",
+                style: TextStyle(fontSize: 20),
+              ),
               width: 300.0,
               height: 65.0,
               alignment: Alignment.center,
             ),
             Container(
-              child: Text(""),
-            ),
-            Container(
             decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey),
+              color: Colors.white,
+            border: Border.all(color: Colors.black, width: 5),
     ),
             child: Text(result + "円",
             style: TextStyle(fontSize: 22),
@@ -101,11 +103,9 @@ class _ContentsPageState extends State<ContentsPage> {
               alignment: Alignment.center,
               ),
             Container(
-              child: Text(""),
-            ),
-            Container(
             decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey),
+              color: Colors.white,
+            border: Border.all(color: Colors.black, width: 5),
     ),
             child: Text(widget.MemoList[widget.index].content,
               style: TextStyle(fontSize: 18),
@@ -113,9 +113,6 @@ class _ContentsPageState extends State<ContentsPage> {
               width: 300.0,
               height: 150.0,
               alignment: Alignment.topLeft,
-            ),
-            Container(
-              child: Text(""),
             ),
             Container(
               child: RaisedButton.icon(
@@ -131,8 +128,9 @@ class _ContentsPageState extends State<ContentsPage> {
               ),
             )
             ]
-        ), // This trailing comma makes auto-formatting nicer for build methods.
+        ),// This trailing comma makes auto-formatting nicer for build methods.
       ),
+    ),
     );
   }
 }
