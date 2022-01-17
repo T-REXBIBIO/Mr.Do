@@ -75,12 +75,15 @@ class _changePageState extends State<changePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
+      body: Container(
+        color: Colors.redAccent,
+      child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           Container(
             decoration: BoxDecoration(
-              border: Border.all(color: Colors.grey),
+              color: Colors.white,
+              border: Border.all(color: Colors.black),
             ),
             child: Text("タイトル：" + widget.MemoList[widget.index].title,
             style: TextStyle(fontSize: 22),
@@ -90,9 +93,17 @@ class _changePageState extends State<changePage> {
             height: 65.0,
           ),
           Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              border: Border.all(color: Colors.black),
+              borderRadius: BorderRadius.circular(30),
+            ),
           child: TextField(
-            decoration: InputDecoration(
-              border: OutlineInputBorder(),
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(30),
+                  borderSide: BorderSide(),
+                ),
               hintText: "ここでメモのタイトルを変更できます。",
             ),
             maxLines: null,
@@ -103,7 +114,8 @@ class _changePageState extends State<changePage> {
           ),
           Container(
             decoration: BoxDecoration(
-              border: Border.all(color: Colors.grey),
+              color: Colors.white,
+              border: Border.all(color: Colors.black),
             ),
             child: Text("料金・経費：" + result + "円",
               style: TextStyle(fontSize: 24),
@@ -113,11 +125,19 @@ class _changePageState extends State<changePage> {
             height: 65.0,
           ),
           Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              border: Border.all(color: Colors.black),
+              borderRadius: BorderRadius.circular(30),
+            ),
             child: TextField(
                 keyboardType: TextInputType.number,
                 inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                 decoration: InputDecoration(
-                border: OutlineInputBorder(),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30),
+                    borderSide: BorderSide(),
+                  ),
                 hintText: "ここで料金・経費を変更できます。",
               ),
               maxLines: null,
@@ -128,7 +148,8 @@ class _changePageState extends State<changePage> {
           ),
           Container(
             decoration: BoxDecoration(
-              border: Border.all(color: Colors.grey),
+              color: Colors.white,
+              border: Border.all(color: Colors.black),
             ),
             child: Text("期限:" + Limit + "まで",
             style: TextStyle(fontSize: 20),
@@ -138,6 +159,11 @@ class _changePageState extends State<changePage> {
             height: 65.0,
           ),
           Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              border: Border.all(color: Colors.black),
+              borderRadius: BorderRadius.circular(30),
+            ),
             height: 65,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -150,17 +176,13 @@ class _changePageState extends State<changePage> {
               ],
             ),
             alignment: Alignment.center,
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: Colors.grey,
-              ),
-            ),
           ),
           Container(
               decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey),
+                color: Colors.white,
+                border: Border.all(color: Colors.black),
               ),
-            child: Text("内容:\n" + widget.MemoList[widget.index].content,
+            child: Text("内容:" + widget.MemoList[widget.index].content,
             style: TextStyle(fontSize: 22),
             ),
               alignment: Alignment.topLeft,
@@ -168,9 +190,17 @@ class _changePageState extends State<changePage> {
               height: 70.0
           ),
           Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              border: Border.all(color: Colors.black),
+              borderRadius: BorderRadius.circular(30),
+            ),
             child: TextField(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30),
+                    borderSide: BorderSide(),
+                  ),
                 hintText: "ここでメモの内容を変更できます。",
               ),
               maxLines: null,
@@ -215,6 +245,7 @@ class _changePageState extends State<changePage> {
           ),
         ],
     ),
+      ),
       );
   }
 }

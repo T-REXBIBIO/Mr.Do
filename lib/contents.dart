@@ -81,7 +81,7 @@ class _ContentsPageState extends State<ContentsPage> {
             Container(
               decoration: BoxDecoration(
                 color: Colors.white,
-                border: Border.all(color: Colors.black, width: 5),
+                border: Border.all(color: Colors.black, width: 3),
               ),
               child: Text(Limit + "まで",
                 style: TextStyle(fontSize: 20),
@@ -93,7 +93,7 @@ class _ContentsPageState extends State<ContentsPage> {
             Container(
             decoration: BoxDecoration(
               color: Colors.white,
-            border: Border.all(color: Colors.black, width: 5),
+            border: Border.all(color: Colors.black, width: 3),
     ),
             child: Text(result + "円",
             style: TextStyle(fontSize: 22),
@@ -105,7 +105,7 @@ class _ContentsPageState extends State<ContentsPage> {
             Container(
             decoration: BoxDecoration(
               color: Colors.white,
-            border: Border.all(color: Colors.black, width: 5),
+            border: Border.all(color: Colors.black, width: 3),
     ),
             child: Text(widget.MemoList[widget.index].content,
               style: TextStyle(fontSize: 18),
