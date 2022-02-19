@@ -60,33 +60,6 @@ class _HouseBook extends State<HouseBook> {
     return Scaffold(
       appBar: AppBar(
         title: Text('経費一覧'),
-        actions: <Widget>[
-          Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget> [
-                Row(
-                  children: [
-                    FloatingActionButton.extended(
-                      shape: BeveledRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0)
-                      ),
-                      backgroundColor: Colors.red,
-                      icon: Icon(Icons.home),
-                      label: Text("戻る",
-                        style: TextStyle(
-                            color:Colors.black,
-                            fontSize: 15.0
-                        ),
-                      ),
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                    ),
-                  ],
-                ),
-            ],
-          ),
-        ],
       ),
       body: Container(
         decoration: BoxDecoration(

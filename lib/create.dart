@@ -172,19 +172,6 @@ class _createPageState extends State<createPage> {
                 },
               )
           ),
-          Container(
-            child: RaisedButton.icon(
-              icon: Icon(Icons.home),
-              label: Text("Homeに戻る"),
-            color: Colors.red,
-            shape: BeveledRectangleBorder(
-            borderRadius: BorderRadius.circular(10.0),
-             ),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-          ),
-          ),
         ],
       ),
       ),

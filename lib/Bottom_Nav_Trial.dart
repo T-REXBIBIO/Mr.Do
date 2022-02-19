@@ -31,15 +31,15 @@ class Bottom_Nav_Trial extends State<Bottom_Nav> {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            title: Text('Home'),
+            label: 'Home',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
-            title: Text('Setting'),
+            label: 'Setting',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.search),
-            title: Text('Search'),
+            label: 'Search',
           ),
         ],
         currentIndex: _selectedIndex,

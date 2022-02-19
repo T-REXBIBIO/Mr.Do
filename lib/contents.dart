@@ -72,7 +72,7 @@ class _ContentsPageState extends State<ContentsPage> {
       ),
       body:Container(
       decoration: BoxDecoration(
-      color: Colors.lightGreen
+      color: Colors.white
       ),
         child: Center(
             child: Column(
@@ -114,19 +114,6 @@ class _ContentsPageState extends State<ContentsPage> {
               height: 150.0,
               alignment: Alignment.topLeft,
             ),
-            Container(
-              child: RaisedButton.icon(
-                icon: Icon(Icons.home),
-                label: Text("Homeに戻る"),
-                color: Colors.purple,
-                shape: BeveledRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            )
             ]
         ),// This trailing comma makes auto-formatting nicer for build methods.
       ),
